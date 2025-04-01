@@ -1,86 +1,77 @@
-# Modelo de projeto de ciência de dados
+# Previsão de Preços de Imóveis na Califórnia
 
-Modelo de projeto de ciência de dados para ser utilizado como referência em projetos
-futuros. Desenvolvido por mim, [Francisco Bustamante](https://github.com/chicolucio),
-para alunos iniciantes em ciência de dados de meus cursos e mentorias.
+## Visão Geral
+Este projeto utiliza técnicas de análise exploratória de dados, visualização geográfica e modelos de machine learning para prever os preços de imóveis na Califórnia. O objetivo é desenvolver um sistema interativo que permite aos usuários selecionar um condado e obter previsões de preço com base em variáveis socioeconômicas e geográficas.
 
-Inspiração: [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/)
+## Estrutura do Projeto
 
-Clique no botão **Use this template** para criar um novo repositório com base neste modelo.
+O projeto é dividido em quatro principais etapas:
 
-## Organização do projeto
+1. **Análise Exploratória dos Dados** (`01_edf_eda_projetoregressao_casascalifornia.py`):
+   - Carregamento e limpeza dos dados.
+   - Exploração estatística das variáveis relevantes.
+   - Identificação de correlações entre os atributos.
 
-```
-├── .env               <- Arquivo de variáveis de ambiente (não versionar)
-├── .gitignore         <- Arquivos e diretórios a serem ignorados pelo Git
-├── ambiente.yml       <- O arquivo de requisitos para reproduzir o ambiente de análise
-├── LICENSE            <- Licença de código aberto se uma for escolhida
-├── README.md          <- README principal para desenvolvedores que usam este projeto.
-|
-├── dados              <- Arquivos de dados para o projeto.
-|
-├── modelos            <- Modelos treinados e serializados, previsões de modelos ou resumos de modelos
-|
-├── notebooks          <- Cadernos Jupyter. A convenção de nomenclatura é um número (para ordenação),
-│                         as iniciais do criador e uma descrição curta separada por `-`, por exemplo
-│                         `01-fb-exploracao-inicial-de-dados`.
-│
-|   └──src             <- Código-fonte para uso neste projeto.
-|      │
-|      ├── __init__.py  <- Torna um módulo Python
-|      ├── config.py    <- Configurações básicas do projeto
-|      └── graficos.py  <- Scripts para criar visualizações exploratórias e orientadas a resultados
-|
-├── referencias        <- Dicionários de dados, manuais e todos os outros materiais explicativos.
-|
-├── relatorios         <- Análises geradas em HTML, PDF, LaTeX, etc.
-│   └── imagens        <- Gráficos e figuras gerados para serem usados em relatórios
-```
+2. **Mapas e Visualização Geográfica** (`02_edf_mapas_sns.py`):
+   - Utilização de `seaborn` para visualização de distribuição geográfica.
+   - Geração de mapas interativos para análise espacial.
 
-## Configuração do ambiente
+3. **Análise Geográfica** (`03_edf_analise_geografica.py`):
+   - Manipulação de dados geoespaciais utilizando `geopandas`.
+   - Processamento de informações geográficas para integração com modelos preditivos.
 
-1. Faça o clone do repositório que será criado a partir deste modelo.
+4. **Modelos de Machine Learning** (`04_edf_modelos_ml.py`):
+   - Implementa modelos de regressão para previsão de preços.
+   - Avalia o desempenho dos modelos com métricas apropriadas.
 
-    ```bash
-    git clone ENDERECO_DO_REPOSITORIO
-    ```
+## Interface Interativa
 
-2. Crie um ambiente virtual para o seu projeto utilizando o gerenciador de ambientes de sua preferência.
+A interface do projeto foi desenvolvida utilizando `Streamlit`, permitindo que os usuários selecionem um condado e insiram informações sobre um imóvel para prever seu preço. As principais funcionalidades incluem:
 
-    a. Caso esteja utilizando o `conda`, exporte as dependências do ambiente para o arquivo `ambiente.yml`:
+- **Carregamento e processamento dos dados**:
+  - `carregar_dados_limpos()`: Carrega os dados processados e limpos.
+  - `carregar_dados_geo()`: Processa dados geográficos e ajusta geometrias.
+  - `carregar_modelo()`: Carrega o modelo treinado para previsões.
 
-      ```bash
-      conda env export > ambiente.yml
-      ```
+- **Entrada de dados**:
+  - Usuário seleciona o condado e insere informações como idade do imóvel e renda média.
 
-    b. Caso esteja utilizando outro gerenciador de ambientes, exporte as dependências
-    para o arquivo `requirements.txt` ou outro formato de sua preferência. Adicione o
-    arquivo ao controle de versão, removendo o arquivo `ambiente.yml`.
+- **Visualização no mapa**:
+  - Um mapa interativo exibe os condados da Califórnia e destaca o condado selecionado.
 
-3. Verifique o arquivo `notebooks/01-fb-exemplo.ipynb` para exemplos
-de uso do código.
-4. Renomeie o arquivo `notebooks/01-fb-exemplo.ipynb` para um nome
-mais apropriado ao seu projeto. E siga a convenção de nomenclatura para os demais
-notebooks.
-5. Remova arquivos de exemplo e adicione os arquivos de dados e notebooks do seu
-projeto.
-6. Verifique o arquivo `notebooks/src/config.py` para configurações básicas do projeto.
-Modifique conforme necessário, adicionando ou removendo caminhos de arquivos e
-diretórios.
-7. Atualize o arquivo `referencias/01_dicionario_de_dados.md` com o dicionário de dados
-do seu projeto.
-8. Atualize o `README.md` com informações sobre o seu projeto.
-9. Adicione uma licença ao projeto. Clique
-[aqui](https://docs.github.com/pt/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
-se precisar de ajuda para escolher uma licença.
-10. Renomeie o arquivo `.env.exemplo` para `.env`
-11. Adicione variáveis de ambiente sensíveis ao arquivo `.env`.
+- **Previsão de preço**:
+  - Com base nos dados inseridos, o modelo retorna um preço previsto para o imóvel.
 
-Por padrão, o arquivo `.gitignore` já está configurado para ignorar arquivos de dados e
-arquivos de Notebook (para aqueles que usam ferramentas como
-[Jupytext](https://jupytext.readthedocs.io/en/latest/) e similares). Adicione ou remova
-outros arquivos e diretórios do `.gitignore` conforme necessário. Caso deseje adicionar
-forçadamente um Notebook ao controle de versão, faça um commit forçado com o
-comando `git add --force NOME_DO_ARQUIVO.ipynb`.
+## Link para a página do App: https://california-house-prices-erick-fernandes.streamlit.app/
 
-Para mais informações sobre como usar Git e GitHub, [clique aqui](https://cienciaprogramada.com.br/2021/09/guia-definitivo-git-github/). Sobre ambientes virtuais, [clique aqui](https://cienciaprogramada.com.br/2020/08/ambiente-virtual-projeto-python/).
+## Como Executar
+
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/Erickdf1991/California-House-Prices-Analysis.git
+   cd seu_projeto
+   ```
+
+2. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Execute a aplicação Streamlit:
+   ```bash
+   streamlit run home.py
+   ```
+
+## Tecnologias Utilizadas
+- Python
+- Pandas, NumPy, Scikit-Learn
+- Geopandas, Shapely, Pydeck
+- Streamlit
+- Seaborn, Matplotlib
+- Joblib
+
+## Autor
+Este projeto foi desenvolvido por **Erick Duarte Fernandes**. GitHub https://github.com/Erickdf1991
+
+## Licença
+Este projeto é distribuído sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
